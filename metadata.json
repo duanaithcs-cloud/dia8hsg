@@ -1,0 +1,8 @@
+{
+  "name": "dia8hsgthcshh",
+  "description": "đã đủ kỹ năng địa lí và 4 bậc kiến thức",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

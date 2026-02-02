@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>Địa AI - Neon Elite HSG</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#00f5ff",
+                        "background-dark": "#05070a",
+                        "card-dark": "#0a0f16",
+                        "c1-cyan": "#00f5ff",
+                        "c2-indigo": "#6366f1",
+                        "c3-amber": "#f59e0b",
+                        "c4-green": "#00ff88",
+                        "danger-glow": "#ff0055",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"],
+                        "grotesk": ["Space Grotesk", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --sat: env(safe-area-inset-top);
+            --sar: env(safe-area-inset-right);
+            --sab: env(safe-area-inset-bottom);
+            --sal: env(safe-area-inset-left);
+        }
+
+        body { 
+            font-family: 'Lexend', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background: #05070a;
+            color: #fff;
+            -webkit-tap-highlight-color: transparent;
+            overscroll-behavior-y: none;
+        }
+        
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* HIỆU ỨNG RỒNG THẦN NEON - CẬP NHẬT RỰC RỠ */
+        @keyframes ken-burns {
+            0% { transform: scale(1.0); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1.0; }
+            100% { transform: scale(1.0); opacity: 0.8; }
+        }
+
+        .dragon-bg-container {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+            background: #05070a;
+        }
+
+        .dragon-bg-image {
+            position: absolute;
+            inset: 0;
+            background-image: url('https://raw.githubusercontent.com/duanaithcs-cloud/rongpc/main/rongthanpc.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            animation: ken-burns 20s ease-in-out infinite;
+            /* Tăng mạnh độ sáng, độ bão hòa và độ tương phản */
+            filter: brightness(0.85) saturate(2.2) contrast(1.4) hue-rotate(-10deg) drop-shadow(0 0 30px rgba(0, 245, 255, 0.3));
+            will-change: transform;
+        }
+
+        .dragon-bg-overlay {
+            position: absolute;
+            inset: 0;
+            /* Làm lớp phủ trong suốt hơn ở trung tâm để lộ rồng rực rỡ */
+            background: radial-gradient(circle at center, transparent 10%, rgba(5, 7, 10, 0.4) 50%, #05070a 100%);
+            z-index: 1;
+        }
+
+        /* NEON SCANLINE EFFECT */
+        @keyframes scanline-sweep {
+            0% { top: -100%; opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { top: 100%; opacity: 0; }
+        }
+        .matrix-scanline {
+            position: absolute;
+            left: 0; right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, var(--scan-color, #00f5ff), transparent);
+            box-shadow: 0 0 40px 5px var(--scan-color, #00f5ff);
+            z-index: 50;
+            pointer-events: none;
+            animation: scanline-sweep 3s linear infinite;
+            opacity: 0.15;
+        }
+
+        /* 💎 NEON BUBBLE SKIN */
+        .crypto-bubble-skin {
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2) 0%, transparent 60%),
+                radial-gradient(circle at center, var(--core-color) 0%, rgba(5, 7, 10, 0.95) 100%);
+            box-shadow: 
+                0 0 20px -5px var(--neon-color),
+                inset 0 0 25px var(--neon-color),
+                inset 0 8px 15px rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-sheen {
+            position: absolute;
+            top: 5%;
+            left: 15%;
+            width: 70%;
+            height: 30%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), transparent);
+            border-radius: 50% 50% 20% 20% / 100% 100% 20% 20%;
+            pointer-events: none;
+            z-index: 5;
+            filter: blur(2px);
+        }
+
+        .fill-1 { font-variation-settings: 'FILL' 1, 'wght' 700, 'GRAD' 0, 'opsz' 48; }
+        .text-neon-glow { text-shadow: 0 0 10px currentColor, 0 0 20px currentColor; }
+        .text-halo { text-shadow: 0 2px 10px rgba(0,0,0,0.95), 0 0 5px rgba(255,255,255,0.1); }
+
+        @keyframes neon-pulse {
+            0%, 100% { filter: drop-shadow(0 0 5px var(--neon-color)); }
+            50% { filter: drop-shadow(0 0 20px var(--neon-color)); }
+        }
+        .neon-pulse { animation: neon-pulse 2s infinite; }
+
+        /* Mobile specific adjustments */
+        @media (max-width: 640px) {
+            .dragon-bg-image {
+                background-size: cover;
+                background-position: top;
+            }
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.35.0"
+  }
+}
+</script>
+</head>
+<body class="overflow-hidden bg-background-dark">
+    <div id="root"></div>
+</body>
+</html>
